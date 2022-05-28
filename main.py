@@ -15,18 +15,13 @@
 
 import sys
 from PyQt5.QtWidgets import QApplication
-from view.main_window import MainWindow
-from view.machine_learning_view import MachineLearningObject
+from src.controller.Convert_Service.controller_convert_audio import ConvertControllerAudio
+from src.controller.Convert_Service.controller_convert_image import ConvertControllerImage
 
-
-def main():
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MainWindow() # for main window
-    window.show()
-    #ml = MachineLearningObject()  # for secondary view
-    #ml.show()
-    app.exec()
+    #controller = ConvertControllerAudio()
+    controller = ConvertControllerImage()
+    sys.exit(app.exec())
+    
 
-
-if __name__ == '__main__':
-    main()

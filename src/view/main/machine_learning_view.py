@@ -12,14 +12,12 @@
 #
 
 from PyQt5.QtWidgets import QMainWindow
-from view.label import Label
-from view.button import Button
-from view.combobox import ComboBox
+from src.view.main.label import Label
+from src.view.main.button import Button
+from src.view.main.combobox import ComboBox
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QHBoxLayout
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QStackedLayout
 
 
 class MachineLearningObject(QMainWindow):

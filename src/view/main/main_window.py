@@ -14,10 +14,8 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QStackedLayout
 from PyQt5.QtWidgets import QGridLayout
-from view.button import Button
-from PyQt5 import QtWidgets
+from src.view.main.button import Button
 from PyQt5.QtGui import QPixmap
 
 
