@@ -1,3 +1,4 @@
+import os
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
                             QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog
 from src.view.machine_learning.components.title import Title
@@ -7,6 +8,8 @@ from src.view.machine_learning.components.buttons_top import ButtonsTop
 class MainTrainIrisWidget(QWidget):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/resources/compiler.css"
+        self.setStyleSheet(open(self.style).read())
         self.layout = QVBoxLayout()
         self.layout.addLayout(ButtonsTop())
         self.layout.addWidget(Title())

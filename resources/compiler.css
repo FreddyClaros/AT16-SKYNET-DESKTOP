@@ -1,15 +1,31 @@
-Qwidget {
+Qwidget{
     background-color= #DCDF00;
     font-style: arial;
-    border-radius;
     font-size: 12px;
     height: 20px;
 }
-QPushButton {
+QPushButton{
     background-color: #005898;
     color: white;
+    border-radius: 40%;
+    Width:300px;
+    height:40px;
 }
 QPushButton:hover{
-    background-color: #c0c0c0;
+    background-color: white ;
     color: black;
+    border: 2px solid red;
+}
+QComboBox{
+    background-color: #3C93C3;
+    color:white;
+    font-size: 15px;
+}
+QPlainTextEdit{
+    background-color: #B4BEC8;
+    color:white;
+}
+QLabel{
+    font-size: 15px;
+    text-align: center;
 }
