@@ -8,7 +8,8 @@ class Title(QLabel):
         self.create_title()
 
     def create_title(self):
-        self.label = QLabel('SKYNET - Machine Learning', self)
+
+        self.label = QLabel('SKYNET - Machine Learning - ', self)
         self.label.move(1000, 0)
         self.label.setFont(QFont('Arial', 10))
 
