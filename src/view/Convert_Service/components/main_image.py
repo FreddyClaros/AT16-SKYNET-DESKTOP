@@ -1,3 +1,16 @@
+#
+# main_image.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
+
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
     QComboBox, QSpacerItem, QSizePolicy, QFileDialog
 from src.view.Convert_Service.components.title import Title
@@ -61,11 +74,18 @@ class MainWidget(QWidget):
 
         browse_button = QPushButton("Browse")
         browse_button.clicked.connect(self.browse_file)
-        b_button = QPushButton("Convert")
+
+        convert_button = QPushButton("Convert")
+
+        height_field = QLineEdit()
+
+        width_field = QLineEdit()
 
         output_format = QComboBox()
         output_format.addItem("png")
         output_format.addItem("jpg")
+
+        text_area_message = QPlainTextEdit()
 
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
 
@@ -84,15 +104,15 @@ class MainWidget(QWidget):
         menu.addWidget(QLabel("Horizontal flip:"))
         menu.addWidget(list_horizontal_flip)
         menu.addWidget(QLabel("Height:"))
-        menu.addWidget(QLineEdit())
+        menu.addWidget(height_field)
         menu.addWidget(QLabel("Width:"))
-        menu.addWidget(QLineEdit())
+        menu.addWidget(width_field)
         menu.addWidget(QLabel("Output Format:"))
         menu.addWidget(output_format)
-        menu.addWidget(b_button)
+        menu.addWidget(convert_button)
         menu.addSpacerItem(vertical_spacer)
         menu.addWidget(QLabel("Message:"))
-        menu.addWidget(QPlainTextEdit())
+        menu.addWidget(text_area_message)
         return menu
 
     def browse_file(self):

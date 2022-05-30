@@ -1,5 +1,5 @@
 #
-# controller_convert_image.py Copyright (c) 2022 Jalasoft.
+# controller_convert_wav_to_txt.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -11,10 +11,11 @@
 # with Jalasoft.
 #
 
-from src.view.Convert_Service.convert_image_view import ConvertImageView
+
+from src.view.Convert_Service.convert_wav_to_txt_view import ConvertWavToTxtView
 
 
-class ConvertControllerImage:
+class ConvertControllerWavToTxt:
     def __init__(self):
-        self.view = ConvertImageView()
+        self.view = ConvertWavToTxtView()
         self.view.init_ui()

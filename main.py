@@ -17,11 +17,21 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from src.controller.Convert_Service.controller_convert_audio import ConvertControllerAudio
 from src.controller.Convert_Service.controller_convert_image import ConvertControllerImage
+from src.controller.Convert_Service.controller_convert_ocr import ConvertControllerOCR
+from src.controller.Convert_Service.controller_convert_translator import ConvertControllerTranslator
+from src.controller.Convert_Service.controller_convert_video import ConvertControllerVideo
+from src.controller.Convert_Service.controller_convert_metadata import ConvertControllerMetadata
+from src.controller.Convert_Service.controller_convert_wav_to_txt import ConvertControllerWavToTxt
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     #controller = ConvertControllerAudio()
-    controller = ConvertControllerImage()
+    #controller = ConvertControllerImage()
+    #controller = ConvertControllerOCR()
+    #controller = ConvertControllerTranslator()
+    #controller = ConvertControllerVideo()
+    #controller = ConvertControllerMetadata()
+    controller = ConvertControllerWavToTxt()
     sys.exit(app.exec())
     
 

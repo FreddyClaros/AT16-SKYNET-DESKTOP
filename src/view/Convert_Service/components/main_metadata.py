@@ -1,5 +1,5 @@
 #
-# main_audio.py Copyright (c) 2022 Jalasoft.
+# main_metadata.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -17,7 +17,7 @@ from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
 
-class MainWidget(QWidget):
+class MainMetadata(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QVBoxLayout()
@@ -34,41 +34,32 @@ class MainWidget(QWidget):
         return body
 
     def right_layout(self):
-        show_button = QPushButton("Show Image")
+        show_button = QPushButton("Show Document")
         right = QVBoxLayout()
         right.addWidget(QPlainTextEdit(), 75)
         right.addWidget(show_button)
         return right
 
-
     def left_layout(self):
         list_convert = QComboBox()
-        list_convert.addItem("Audio")
-        list_convert.addItem("OCR")
-        list_convert.addItem("Video")
         list_convert.addItem("Metadata")
-        list_convert.addItem("Image")
+        list_convert.addItem("Video")
         list_convert.addItem("Translator")
+        list_convert.addItem("OCR")
+        list_convert.addItem("Image")
+        list_convert.addItem("Audio")
         list_convert.addItem("Wav to Txt")
 
-        acodex_field = QLineEdit()
-
-        audio_channel_field = QLineEdit()
-
-        bit_rate_field = QLineEdit()
-
-        sample_rate_field = QLineEdit()
+        list_format = QComboBox()
+        list_format.addItem("txt")
 
         self.file_path = QLineEdit()
         self.file_path.setReadOnly(True)
 
         browse_button = QPushButton("Browse")
         browse_button.clicked.connect(self.browse_file)
-        convert_button = QPushButton("Convert")
 
-        output_format = QComboBox()
-        output_format.addItem("mp3")
-        output_format.addItem("mp4")
+        convert_button = QPushButton("Convert")
 
         text_area_message = QPlainTextEdit()
 
@@ -80,16 +71,8 @@ class MainWidget(QWidget):
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
-        menu.addWidget(QLabel("Acodex:"))
-        menu.addWidget(acodex_field)
-        menu.addWidget(QLabel("Audio Channel:"))
-        menu.addWidget(audio_channel_field)
-        menu.addWidget(QLabel("Bit Rate:"))
-        menu.addWidget(bit_rate_field)
-        menu.addWidget(QLabel("Sample Rate:"))
-        menu.addWidget(sample_rate_field)
         menu.addWidget(QLabel("Output Format:"))
-        menu.addWidget(output_format)
+        menu.addWidget(list_format)
         menu.addWidget(convert_button)
         menu.addSpacerItem(vertical_spacer)
         menu.addWidget(QLabel("Message:"))
