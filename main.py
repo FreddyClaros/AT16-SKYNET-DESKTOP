@@ -17,11 +17,21 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from src.controller.Convert_Service.controller_convert_audio import ConvertControllerAudio
 from src.controller.Convert_Service.controller_convert_image import ConvertControllerImage
+from src.controller.machine_learning_service.controller_ml_object import MLObjectController
+from src.controller.machine_learning_service.controller_ml_face import MLFaceController
+from src.controller.machine_learning_service.controller_ml_search_iris import MLSearchIrisController
+from src.controller.machine_learning_service.controller_ml_train_iris import MLTrainIrisController
+from src.controller.machine_learning_service.controller_ml_emotion import MLEmotionController
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     #controller = ConvertControllerAudio()
-    controller = ConvertControllerImage()
+    # controller = ConvertControllerImage()
+    # controller = MLObjectController()
+    # controller = MLFaceController()
+    # controller = MLSearchIrisController()
+    # controller = MLTrainIrisController()
+    controller = MLEmotionController()
     sys.exit(app.exec())
     
 
