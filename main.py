@@ -22,6 +22,11 @@ from src.controller.Convert_Service.controller_convert_translator import Convert
 from src.controller.Convert_Service.controller_convert_video import ConvertControllerVideo
 from src.controller.Convert_Service.controller_convert_metadata import ConvertControllerMetadata
 from src.controller.Convert_Service.controller_convert_wav_to_txt import ConvertControllerWavToTxt
+from src.controller.machine_learning_service.controller_ml_object import MLObjectController
+from src.controller.machine_learning_service.controller_ml_face import MLFaceController
+from src.controller.machine_learning_service.controller_ml_search_iris import MLSearchIrisController
+from src.controller.machine_learning_service.controller_ml_train_iris import MLTrainIrisController
+from src.controller.machine_learning_service.controller_ml_emotion import MLEmotionController
 from src.view.main.main_window import MainWindow
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -32,8 +37,11 @@ if __name__ == "__main__":
     #controller = ConvertControllerVideo()
     #controller = ConvertControllerMetadata()
     #controller = ConvertControllerWavToTxt()
+    # controller = MLObjectController()
+    # controller = MLFaceController()
+    # controller = MLSearchIrisController()
+    # controller = MLTrainIrisController()
+    # controller = MLEmotionController()
     controller = MainWindow()
     controller.show()
     sys.exit(app.exec())
-    
-
