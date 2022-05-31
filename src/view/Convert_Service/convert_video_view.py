@@ -11,6 +11,7 @@
 # with Jalasoft.
 #
 
+import os
 from PyQt5.QtWidgets import QMainWindow
 from src.view.Convert_Service.components.main_video import MainVideo
 
@@ -18,6 +19,8 @@ from src.view.Convert_Service.components.main_video import MainVideo
 class ConvertVideoView(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/src/resources/converter_styles.css"
+        self.setStyleSheet(open(self.style).read())
         self.main_widget = MainVideo()
 
     def init_ui(self):

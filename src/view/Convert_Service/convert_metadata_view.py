@@ -11,6 +11,7 @@
 # with Jalasoft.
 #
 
+import os
 from PyQt5.QtWidgets import QMainWindow
 from src.view.Convert_Service.components.main_metadata import MainMetadata
 
@@ -18,6 +19,8 @@ from src.view.Convert_Service.components.main_metadata import MainMetadata
 class ConvertMetadataView(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/src/resources/converter_styles.css"
+        self.setStyleSheet(open(self.style).read())
         self.main_widget = MainMetadata()
 
     def init_ui(self):

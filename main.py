@@ -22,7 +22,7 @@ from src.controller.Convert_Service.controller_convert_translator import Convert
 from src.controller.Convert_Service.controller_convert_video import ConvertControllerVideo
 from src.controller.Convert_Service.controller_convert_metadata import ConvertControllerMetadata
 from src.controller.Convert_Service.controller_convert_wav_to_txt import ConvertControllerWavToTxt
-
+from src.view.main.main_window import MainWindow
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     #controller = ConvertControllerAudio()
@@ -31,7 +31,9 @@ if __name__ == "__main__":
     #controller = ConvertControllerTranslator()
     #controller = ConvertControllerVideo()
     #controller = ConvertControllerMetadata()
-    controller = ConvertControllerWavToTxt()
+    #controller = ConvertControllerWavToTxt()
+    controller = MainWindow()
+    controller.show()
     sys.exit(app.exec())
     
 

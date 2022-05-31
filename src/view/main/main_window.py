@@ -10,13 +10,15 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
+import sys
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QGridLayout
 from src.view.main.button import Button
 from PyQt5.QtGui import QPixmap
+from PyQt5 import QtWidgets
+from src.controller.Convert_Service.controller_convert_audio import ConvertControllerAudio
 
 
 class MainWindow(QMainWindow):
@@ -34,6 +36,7 @@ class MainWindow(QMainWindow):
         # buttons
         booking_button = Button().action_button("Booking")
         converter_button = Button().action_button("Converter")
+        converter_button.clicked.connect(self.popWindow)
         machine_learning_button = Button().action_button("Machine Learning")
         reporting_button = Button().action_button("Reporting")
         # layers
@@ -43,8 +46,14 @@ class MainWindow(QMainWindow):
         background_layer.addWidget(machine_learning_button, 1, 0)
         background_layer.addWidget(reporting_button, 1, 1)
         # image
-        pixmap = QPixmap(r'resources/terminator.jpg')
+        pixmap = QPixmap(r'src/resources/terminator.jpg')
         pixmap_resize = pixmap.scaledToWidth(1440)
         image_label.setPixmap(pixmap_resize)
         image_label.setLayout(background_layer)
         self.setCentralWidget(image_label)
+
+    def popWindow(self):
+        self.hide()
+        self.ui2 = ConvertControllerAudio()
+
+

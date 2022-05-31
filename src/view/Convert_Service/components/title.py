@@ -23,4 +23,4 @@ class Title(QLabel):
     def create_title(self):
         self.label = QLabel('SKYNET - Convert', self)
         self.label.move(1000, 0)
-        self.label.setFont(QFont('Arial', 10))
+        self.label.setFont(QFont('Arial Black', 10))
