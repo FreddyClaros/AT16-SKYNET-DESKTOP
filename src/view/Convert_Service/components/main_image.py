@@ -13,6 +13,7 @@
 
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
     QComboBox, QSpacerItem, QSizePolicy, QFileDialog
+from PyQt5.QtGui import QIcon, QPixmap
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
@@ -34,87 +35,135 @@ class MainWidget(QWidget):
         return body
 
     def right_layout(self):
+        self.text_result2 = QPlainTextEdit()
+        self.label_right = QLabel(self)
+        self.pixmap = QPixmap()
+        self.label_right.setPixmap(self.pixmap)
+
         show_button = QPushButton("Show Image")
         right = QVBoxLayout()
-        right.addWidget(QPlainTextEdit(), 75)
+        right.addWidget(self.label_right, 75)
         right.addWidget(show_button)
         return right
 
 
     def left_layout(self):
-        list_convert = QComboBox()
-        list_convert.addItem("Image")
-        list_convert.addItem("OCR")
-        list_convert.addItem("Video")
-        list_convert.addItem("Metadata")
-        list_convert.addItem("Audio")
-        list_convert.addItem("Translator")
-        list_convert.addItem("Wav to Txt")
+        self.list_convert = QComboBox()
+        self.list_convert.addItem("Image")
+        self.list_convert.addItem("OCR")
+        self.list_convert.addItem("Video")
+        self.list_convert.addItem("Metadata")
+        self.list_convert.addItem("Audio")
+        self.list_convert.addItem("Translator")
+        self.list_convert.addItem("Wav to Txt")
 
-        list_color = QComboBox()
-        list_color.addItem("Gray")
-        list_color.addItem("Original")
+        self.list_color = QComboBox()
+        self.list_color.addItem("gray")
+        self.list_color.addItem("sRGB")
 
-        list_degrees = QComboBox()
-        list_degrees.addItem("90")
-        list_degrees.addItem("180")
-        list_degrees.addItem("270")
-        list_degrees.addItem("360")
+        self.list_degrees = QComboBox()
+        self.list_degrees.addItem("90")
+        self.list_degrees.addItem("180")
+        self.list_degrees.addItem("270")
+        self.list_degrees.addItem("360")
 
-        list_vertical_flip = QComboBox()
-        list_vertical_flip.addItem("True")
-        list_vertical_flip.addItem("False")
+        self.list_vertical_flip = QComboBox()
+        self.list_vertical_flip.addItem("True")
+        self.list_vertical_flip.addItem("False")
 
-        list_horizontal_flip = QComboBox()
-        list_horizontal_flip.addItem("True")
-        list_horizontal_flip.addItem("False")
+        self.list_horizontal_flip = QComboBox()
+        self.list_horizontal_flip.addItem("True")
+        self.list_horizontal_flip.addItem("False")
 
         self.file_path = QLineEdit()
         self.file_path.setReadOnly(True)
 
-        browse_button = QPushButton("Browse")
-        browse_button.clicked.connect(self.browse_file)
+        self.height = QLineEdit()
 
-        convert_button = QPushButton("Convert")
+        self.width = QLineEdit()
 
-        height_field = QLineEdit()
+        self.browse_button = QPushButton("Browse")
+        self.browse_button.clicked.connect(self.browse_file)
 
-        width_field = QLineEdit()
+        self.convert = QPushButton("Convert")
 
-        output_format = QComboBox()
-        output_format.addItem("png")
-        output_format.addItem("jpg")
+        self.output_format = QComboBox()
+        self.output_format.addItem("png")
+        self.output_format.addItem("jpg")
 
-        text_area_message = QPlainTextEdit()
+        self.text_result = QPlainTextEdit()
 
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
 
         menu = QVBoxLayout()
         menu.addWidget(QLabel("Convert:"))
-        menu.addWidget(list_convert)
+        menu.addWidget(self.list_convert)
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
-        menu.addWidget(browse_button)
+        menu.addWidget(self.browse_button)
         menu.addWidget(QLabel("Color:"))
-        menu.addWidget(list_color)
+        menu.addWidget(self.list_color)
         menu.addWidget(QLabel("Rotate:"))
-        menu.addWidget(list_degrees)
+        menu.addWidget(self.list_degrees)
         menu.addWidget(QLabel("Vertical flip:"))
-        menu.addWidget(list_vertical_flip)
+        menu.addWidget(self.list_vertical_flip)
         menu.addWidget(QLabel("Horizontal flip:"))
-        menu.addWidget(list_horizontal_flip)
+        menu.addWidget(self.list_horizontal_flip)
         menu.addWidget(QLabel("Height:"))
-        menu.addWidget(height_field)
+        menu.addWidget(self.height)
         menu.addWidget(QLabel("Width:"))
-        menu.addWidget(width_field)
+        menu.addWidget(self.width)
         menu.addWidget(QLabel("Output Format:"))
-        menu.addWidget(output_format)
-        menu.addWidget(convert_button)
+        menu.addWidget(self.output_format)
+        menu.addWidget(self.convert)
         menu.addSpacerItem(vertical_spacer)
         menu.addWidget(QLabel("Message:"))
-        menu.addWidget(text_area_message)
+        menu.addWidget(self.text_result)
         return menu
 
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
+
+    def get_file_path(self):
+        return str(self.file_path.text())
+
+    def set_result(self, message):
+        self.pixmap = QPixmap(message)
+        return self.label_right.setPixmap(self.pixmap)
+
+    def get_list_convert(self):
+        return str(self.list_convert.currentText())
+
+    def get_color(self):
+        return str(self.list_color.currentText())
+
+    def get_degrees(self):
+        return str(self.list_degrees.currentText())
+
+    def get_horizontal_flip(self):
+        result = ''
+        rsp = str(self.list_horizontal_flip.currentText())
+        if rsp == 'True':
+            result = '-flop'
+        return result
+
+    def get_vertical_flip(self):
+        result = ''
+        rsp = str(self.list_vertical_flip.currentText())
+        if rsp == 'True':
+            result = '-flip'
+        return result
+
+    def get_height(self):
+        return str(self.height.text())
+
+    def get_width(self):
+        return str(self.width.text())
+
+    def get_output_format(self):
+        return str(self.output_format.currentText())
+
+    def get_convert_button(self):
+        return self.convert
+

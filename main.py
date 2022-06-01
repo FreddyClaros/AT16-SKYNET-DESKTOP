@@ -31,7 +31,7 @@ from src.view.main.main_window import MainWindow
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     #controller = ConvertControllerAudio()
-    #controller = ConvertControllerImage()
+    controller = ConvertControllerImage()
     #controller = ConvertControllerOCR()
     #controller = ConvertControllerTranslator()
     #controller = ConvertControllerVideo()
@@ -42,6 +42,6 @@ if __name__ == "__main__":
     # controller = MLSearchIrisController()
     # controller = MLTrainIrisController()
     # controller = MLEmotionController()
-    controller = MainWindow()
-    controller.show()
+    #controller = MainWindow()
+    #controller.show()
     sys.exit(app.exec())
