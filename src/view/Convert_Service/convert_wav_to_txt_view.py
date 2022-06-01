@@ -1,5 +1,5 @@
 #
-# convert_audio_view.py Copyright (c) 2022 Jalasoft.
+# convert_wav_to_txt_view.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -13,18 +13,18 @@
 
 import os
 from PyQt5.QtWidgets import QMainWindow
-from src.view.Convert_Service.components.main_image import MainWidget
+from src.view.Convert_Service.components.main_wav_to_txt import MainWavToTxt
 
 
-class ConvertImageView(QMainWindow):
+class ConvertWavToTxtView(QMainWindow):
     def __init__(self):
         super().__init__()
         self.style = os.getcwd() + "/src/resources/converter_styles.css"
         self.setStyleSheet(open(self.style).read())
-        self.main_widget = MainWidget()
+        self.main_widget = MainWavToTxt()
 
     def init_ui(self):
-        self.setWindowTitle("Convert Image")
+        self.setWindowTitle("Convert Wav To Txt")
         self.setCentralWidget(self.main_widget)
         self.showMaximized()
         self.show()

@@ -10,7 +10,7 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
+import os
 from PyQt5.QtWidgets import QMainWindow
 from src.view.Convert_Service.components.main_audio import MainWidget
 
@@ -18,6 +18,8 @@ from src.view.Convert_Service.components.main_audio import MainWidget
 class ConvertAudioView(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/src/resources/converter_styles.css"
+        self.setStyleSheet(open(self.style).read())
         self.main_widget = MainWidget()
 
     def init_ui(self):

@@ -1,5 +1,5 @@
 #
-# controller_convert_image.py Copyright (c) 2022 Jalasoft.
+# controller_convert_metadata.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -11,9 +11,11 @@
 # with Jalasoft.
 #
 
-from src.view.Convert_Service.convert_image_view import ConvertImageView
 
-class ConvertControllerImage:
+from src.view.Convert_Service.convert_metadata_view import ConvertMetadataView
+
+
+class ConvertControllerMetadata:
     def __init__(self):
-        self.view = ConvertImageView()
+        self.view = ConvertMetadataView()
         self.view.init_ui()
