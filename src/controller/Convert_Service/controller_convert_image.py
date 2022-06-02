@@ -12,8 +12,36 @@
 #
 
 from src.view.Convert_Service.convert_image_view import ConvertImageView
+import requests
 
 class ConvertControllerImage:
     def __init__(self):
         self.view = ConvertImageView()
         self.view.init_ui()
+        self.view.main_widget.get_convert_button().clicked.connect(self.show_result)
+
+
+    def show_result(self):
+        url = "http://127.0.0.1:6005/convert"
+        file_path = self.view.main_widget.get_file_path()
+        file = {'file': open(file_path, 'rb')}
+        convert = self.view.main_widget.get_list_convert()
+        color = self.view.main_widget.get_color()
+        height = self.view.main_widget.get_height()
+        width = self.view.main_widget.get_width()
+        formato = self.view.main_widget.get_output_format()
+        rotate = self.view.main_widget.get_degrees()
+        flip_vert = self.view.main_widget.get_vertical_flip()
+        flip_hor = self.view.main_widget.get_horizontal_flip()
+        payload = {'color': color, 'rotate': rotate, 'height': height, 'width': width, 'format': formato,
+                   'convert': convert, 'vertical_flip': flip_vert, 'horizontal_flip': flip_hor}
+        response = requests.post(url, files=file, data=payload, verify=False)
+        print(response)
+        resp = response.json()
+        message = resp['message']
+        url = message
+        name_fyle = url.split('/')
+        myfile = requests.get(url)
+        folder = 'Download/'+name_fyle[-1]
+        open(folder, 'wb').write(myfile.content)
+        self.view.main_widget.set_result(folder)
