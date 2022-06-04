@@ -10,15 +10,15 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-import sys
+
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QGridLayout
 from src.view.main.button import Button
 from PyQt5.QtGui import QPixmap
-from PyQt5 import QtWidgets
-from src.controller.Convert_Service.controller_convert_audio import ConvertControllerAudio
+from src.controller.menu.controller_convert_menu import ControllerConvertMenu
+from src.controller.menu.controller_ml_menu import ControllerMLMenu
 
 
 class MainWindow(QMainWindow):
@@ -36,8 +36,9 @@ class MainWindow(QMainWindow):
         # buttons
         booking_button = Button().action_button("Booking")
         converter_button = Button().action_button("Converter")
-        converter_button.clicked.connect(self.popWindow)
+        converter_button.clicked.connect(self.pop_window_convert)
         machine_learning_button = Button().action_button("Machine Learning")
+        machine_learning_button.clicked.connect(self.pop_window_machine)
         reporting_button = Button().action_button("Reporting")
         # layers
         background_layer = QGridLayout()
@@ -46,14 +47,18 @@ class MainWindow(QMainWindow):
         background_layer.addWidget(machine_learning_button, 1, 0)
         background_layer.addWidget(reporting_button, 1, 1)
         # image
-        pixmap = QPixmap(r'src/resources/terminator.jpg')
+        pixmap = QPixmap(r'resources/terminator.jpg')
         pixmap_resize = pixmap.scaledToWidth(1440)
         image_label.setPixmap(pixmap_resize)
         image_label.setLayout(background_layer)
         self.setCentralWidget(image_label)
 
-    def popWindow(self):
+    def pop_window_convert(self):
         self.hide()
-        self.ui2 = ConvertControllerAudio()
+        self.ui2 = ControllerConvertMenu()
+
+    def pop_window_machine(self):
+        self.hide()
+        self.ui1 = ControllerMLMenu()
 
 

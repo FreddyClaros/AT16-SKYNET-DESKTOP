@@ -1,3 +1,16 @@
+#
+# main_train_iris.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
+
 import os
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
                             QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog
@@ -11,7 +24,8 @@ class MainTrainIrisWidget(QWidget):
         self.style = os.getcwd() + "/resources/compiler.css"
         self.setStyleSheet(open(self.style).read())
         self.layout = QVBoxLayout()
-        self.layout.addLayout(ButtonsTop())
+        self.buttons = ButtonsTop()
+        self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 20)
         self.setLayout(self.layout)
@@ -34,13 +48,7 @@ class MainTrainIrisWidget(QWidget):
 
     @staticmethod
     def left_layout(self):
-        list_machine_learning = QComboBox()
-        list_machine_learning.addItem("Emotion Recognizer")
-        list_machine_learning.addItem("Iris Recognizer search")
-        list_machine_learning.addItem("Face Recognizer")
-        list_machine_learning.addItem("Object Recognizer")
-        list_machine_learning.addItem("Iris Recognizer train")
-
+        
         self.file_path = QLineEdit()
         self.file_path.setReadOnly(True)
         self.file_path_bottom = QLineEdit()
@@ -70,8 +78,7 @@ class MainTrainIrisWidget(QWidget):
         vertical_spacer = QSpacerItem(10, 700, QSizePolicy.Expanding)
 
         menu = QVBoxLayout()
-        menu.addWidget(QLabel("Search by:"))
-        menu.addWidget(list_machine_learning)
+        menu.addWidget(QLabel("Train Iris Recognizer"))
         menu.addWidget(QLabel("You Want to:"))
         menu.addWidget(models)
         menu.addWidget(QLabel("Iris image Path:"))
@@ -88,4 +95,6 @@ class MainTrainIrisWidget(QWidget):
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
-
+    
+    def get_layout(self):
+        return self.buttons

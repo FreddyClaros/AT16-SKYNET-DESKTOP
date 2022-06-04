@@ -1,5 +1,5 @@
 Qwidget{
-    background-color= #DCDF00;
+    background-color: #DCDF00;
     font-style: arial;
     font-size: 12px;
     height: 20px;
@@ -7,12 +7,12 @@ Qwidget{
 QPushButton{
     background-color: #005898;
     color: white;
-    border-radius: 40%;
+    border-radius: 10%;
     Width:300px;
-    height:40px;
+    height:30px;
 }
 QPushButton:hover{
-    background-color: white ;
+    background-color: #267394 ;
     color: black;
     border: 2px solid red;
 }

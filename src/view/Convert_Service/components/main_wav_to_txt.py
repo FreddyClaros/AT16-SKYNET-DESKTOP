@@ -21,7 +21,8 @@ class MainWavToTxt(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QVBoxLayout()
-        self.layout.addLayout(ButtonsTop())
+        self.buttons = ButtonsTop()
+        self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
@@ -41,14 +42,6 @@ class MainWavToTxt(QWidget):
         return right
 
     def left_layout(self):
-        list_convert = QComboBox()
-        list_convert.addItem("Wav to Txt")
-        list_convert.addItem("Metadata")
-        list_convert.addItem("Video")
-        list_convert.addItem("Translator")
-        list_convert.addItem("OCR")
-        list_convert.addItem("Image")
-        list_convert.addItem("Audio")
 
         list_language = QComboBox()
         list_language.addItem("en-EN")
@@ -70,8 +63,7 @@ class MainWavToTxt(QWidget):
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
 
         menu = QVBoxLayout()
-        menu.addWidget(QLabel("Convert:"))
-        menu.addWidget(list_convert)
+        menu.addWidget(QLabel("Convert Wav To Txt"))
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
@@ -88,3 +80,6 @@ class MainWavToTxt(QWidget):
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
+    
+    def get_layout(self):
+        return self.buttons
