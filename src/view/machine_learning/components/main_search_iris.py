@@ -12,8 +12,8 @@
 #
 
 import os
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
-                            QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QHeaderView, \
+                     QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView
 from src.view.machine_learning.components.title import Title
 from src.view.machine_learning.components.buttons_top import ButtonsTop
 
@@ -39,10 +39,11 @@ class MainSearchIrisWidget(QWidget):
 
     @staticmethod
     def right_layout(self):
-
+        self.table = QTableWidget()
+        self.setting_table()
         show_button = QPushButton("Show Image")
         right = QVBoxLayout()
-        right.addWidget(QPlainTextEdit(), 65)
+        right.addWidget(self.table)
         right.addWidget(show_button)
         return right
 
@@ -99,3 +100,9 @@ class MainSearchIrisWidget(QWidget):
     def get_layout(self):
         return self.buttons
 
+    def setting_table(self):
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(('Colum1', 'Colum2', 'Colum3'))
+        self.table.setColumnHidden(5, True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)

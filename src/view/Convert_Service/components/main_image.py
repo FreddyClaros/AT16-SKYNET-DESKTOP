@@ -161,5 +161,3 @@ class MainWidget(QWidget):
     
     def get_layout(self):
         return self.buttons
-
-

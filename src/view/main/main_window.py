@@ -11,12 +11,12 @@
 # with Jalasoft.
 #
 
+
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QGridLayout
 from src.view.main.button import Button
-from PyQt5.QtGui import QPixmap
 from src.controller.menu.controller_convert_menu import ControllerConvertMenu
 from src.controller.menu.controller_ml_menu import ControllerMLMenu
 
@@ -24,10 +24,12 @@ from src.controller.menu.controller_ml_menu import ControllerMLMenu
 class MainWindow(QMainWindow):
     def __init__(self):
         super(QMainWindow, self).__init__()
+        
         self.init_ui()
+        
 
     def init_ui(self):
-        self.setWindowTitle("AT16 Skynet project")
+        self.setWindowTitle("AT16 SKYNET")
         self.setGeometry(20, 50, 1440, 810)
         #widget
         image_widget = QWidget()
@@ -47,11 +49,10 @@ class MainWindow(QMainWindow):
         background_layer.addWidget(machine_learning_button, 1, 0)
         background_layer.addWidget(reporting_button, 1, 1)
         # image
-        pixmap = QPixmap(r'resources/terminator.jpg')
-        pixmap_resize = pixmap.scaledToWidth(1440)
-        image_label.setPixmap(pixmap_resize)
+        
         image_label.setLayout(background_layer)
         self.setCentralWidget(image_label)
+        self.showMaximized()
 
     def pop_window_convert(self):
         self.hide()
@@ -60,5 +61,3 @@ class MainWindow(QMainWindow):
     def pop_window_machine(self):
         self.hide()
         self.ui1 = ControllerMLMenu()
-
-

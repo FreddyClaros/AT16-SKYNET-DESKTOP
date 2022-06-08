@@ -11,6 +11,7 @@
 # with Jalasoft.
 #
 
+import os
 from PyQt5.QtWidgets import QMainWindow
 from src.view.main.components.main_convert_menu import MainConvertMenuWidget
 from src.controller.Convert_Service.controller_convert_audio import ConvertControllerAudio
@@ -24,6 +25,8 @@ from src.controller.Convert_Service.controller_convert_wav_to_txt import Convert
 class ConvertMenuView(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/resources/main.css"
+        self.setStyleSheet(open(self.style).read())
         self.main_widget = MainConvertMenuWidget()
 
     def init_ui(self):

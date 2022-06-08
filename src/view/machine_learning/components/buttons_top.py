@@ -30,7 +30,3 @@ class ButtonsTop(QHBoxLayout):
     
     def get_button_menu_convert(self):
         return self.converter_button
-
-
-
-

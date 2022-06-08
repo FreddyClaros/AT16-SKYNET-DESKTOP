@@ -12,7 +12,7 @@
 #
 
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
-    QComboBox, QSpacerItem, QSizePolicy, QFileDialog
+                     QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QHeaderView, QAbstractItemView
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
@@ -35,9 +35,11 @@ class MainWavToTxt(QWidget):
         return body
 
     def right_layout(self):
+        self.table = QTableWidget()
+        self.setting_table()
         show_button = QPushButton("Show Document")
         right = QVBoxLayout()
-        right.addWidget(QPlainTextEdit(), 75)
+        right.addWidget(self.table)
         right.addWidget(show_button)
         return right
 
@@ -83,3 +85,10 @@ class MainWavToTxt(QWidget):
     
     def get_layout(self):
         return self.buttons
+
+    def setting_table(self):
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(('Colum1', 'Colum2', 'Colum3'))
+        self.table.setColumnHidden(5, True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)

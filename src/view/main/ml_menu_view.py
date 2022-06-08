@@ -11,6 +11,7 @@
 # with Jalasoft.
 #
 
+import os
 from PyQt5.QtWidgets import QMainWindow
 from src.view.main.components.main_ml_menu import MainMLMenuWidget
 from src.controller.machine_learning_service.controller_ml_emotion import MLEmotionController
@@ -22,6 +23,8 @@ from src.controller.machine_learning_service.controller_ml_train_iris import MLT
 class MLMenuView(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/resources/main.css"
+        self.setStyleSheet(open(self.style).read())
         self.main_widget = MainMLMenuWidget()
 
     def init_ui(self):

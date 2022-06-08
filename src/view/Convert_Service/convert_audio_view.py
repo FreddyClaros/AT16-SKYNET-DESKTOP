@@ -10,6 +10,7 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 import os
 from PyQt5.QtWidgets import QMainWindow
 from src.view.Convert_Service.components.main_audio import MainWidget
