@@ -30,8 +30,8 @@ from src.controller.machine_learning_service.controller_ml_emotion import MLEmot
 from src.view.main.main_window import MainWindow
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    #controller = ConvertControllerAudio()
-    controller = ConvertControllerImage()
+    controller = ConvertControllerAudio()
+    #controller = ConvertControllerImage()
     #controller = ConvertControllerOCR()
     #controller = ConvertControllerTranslator()
     #controller = ConvertControllerVideo()
