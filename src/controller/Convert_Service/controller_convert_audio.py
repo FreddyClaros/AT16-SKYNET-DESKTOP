@@ -23,10 +23,18 @@ class ConvertControllerAudio:
     def __init__(self):
         self.view = ConvertAudioView()
         self.view.init_ui()
+        self.view.get_main_widget().get_layout().get_button_menu_ml().clicked.connect(self.popWindowML)
+        self.view.get_main_widget().get_layout().get_button_menu_convert().clicked.connect(self.popWindowConvert)
         self.view.main_widget.get_convert_button().clicked.connect(self.show_result)
-
         self.table_result = self.view.main_widget.table
         self.count = 0
+    
+    def popWindowML(self):
+        self.view.pop_window_machine()
+    
+    def popWindowConvert(self):
+        self.view.pop_window_convert()
+        
 
     def show_result(self):
         url = "http://127.0.0.1:5002/convert"
@@ -63,5 +71,4 @@ class ConvertControllerAudio:
         self.table_result.setItem(self.count, 1, QTableWidgetItem(input_format_type[-1]))
         self.table_result.setItem(self.count, 2, QTableWidgetItem(output_format))
         self.table_result.setItem(self.count, 3, QTableWidgetItem(abs_path))
-
         self.count += 1

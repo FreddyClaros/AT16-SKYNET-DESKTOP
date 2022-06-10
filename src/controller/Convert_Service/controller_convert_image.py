@@ -19,6 +19,14 @@ class ConvertControllerImage:
         self.view = ConvertImageView()
         self.view.init_ui()
         self.view.main_widget.get_convert_button().clicked.connect(self.show_result)
+        self.view.get_main_widget().get_layout().get_button_menu_ml().clicked.connect(self.popWindowML)
+        self.view.get_main_widget().get_layout().get_button_menu_convert().clicked.connect(self.popWindowConvert)
+    
+    def popWindowML(self):
+        self.view.pop_window_machine()
+    
+    def popWindowConvert(self):
+        self.view.pop_window_convert()
 
 
     def show_result(self):

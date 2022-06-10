@@ -1,5 +1,5 @@
 #
-# convert_audio_view.py Copyright (c) 2022 Jalasoft.
+# convert_image_view.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -19,7 +19,7 @@ from src.view.Convert_Service.components.main_image import MainWidget
 class ConvertImageView(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.style = os.getcwd() + "/src/resources/converter_styles.css"
+        self.style = os.getcwd() + "/resources/compiler.css"
         self.setStyleSheet(open(self.style).read())
         self.main_widget = MainWidget()
 
@@ -28,3 +28,16 @@ class ConvertImageView(QMainWindow):
         self.setCentralWidget(self.main_widget)
         self.showMaximized()
         self.show()
+    
+    def get_main_widget(self):
+        return self.main_widget
+    
+    def pop_window_machine(self):
+        from src.controller.menu.controller_ml_menu import ControllerMLMenu
+        self.close()
+        self.window = ControllerMLMenu()
+    
+    def pop_window_convert(self):
+        from src.controller.menu.controller_convert_menu import ControllerConvertMenu
+        self.close()
+        self.window = ControllerConvertMenu()

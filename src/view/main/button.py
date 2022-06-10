@@ -1,5 +1,5 @@
 #
-# button Copyright (c) 2022 Jalasoft.
+# button.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -10,9 +10,9 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QFont
-from PyQt5.QtGui import QIcon
 
 
 class Button(QPushButton):

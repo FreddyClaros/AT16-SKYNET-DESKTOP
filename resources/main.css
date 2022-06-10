@@ -1,8 +1,7 @@
-Qwidget{
-    background-color: #DCDF00;
-    font-style: arial;
-    font-size: 12px;
-    height: 20px;
+QMainWindow{
+    background: url('resources/terminator.jpg') no-repeat;
+    
+    
 }
 QPushButton{
     background-color: #005898;
@@ -16,16 +15,13 @@ QPushButton:hover{
     color: black;
     border: 2px solid red;
 }
-QComboBox{
-    background-color: #3C93C3;
+QLabel{
+    font-size: 40px;
+    text-align: center;
     color:white;
-    font-size: 15px;
+    
 }
 QPlainTextEdit{
     background-color: #B4BEC8;
     color:white;
-}
-QLabel{
-    font-size: 15px;
-    text-align: center;
 }

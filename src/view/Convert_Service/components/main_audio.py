@@ -11,8 +11,8 @@
 # with Jalasoft.
 #
 
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
-    QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QHeaderView,  QAbstractItemView
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QHeaderView, \
+                    QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 from src.view.Convert_Service.components.player_view import PlayerView
@@ -22,7 +22,8 @@ class MainWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QVBoxLayout()
-        self.layout.addLayout(ButtonsTop())
+        self.buttons = ButtonsTop()
+        self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
@@ -57,16 +58,7 @@ class MainWidget(QWidget):
 
 
     def left_layout(self):
-        self.list_convert = QComboBox()
-
-        self.list_convert.addItem("Audio")
-        self.list_convert.addItem("OCR")
-        self.list_convert.addItem("Video")
-        self.list_convert.addItem("Metadata")
-        self.list_convert.addItem("Image")
-        self.list_convert.addItem("Translator")
-        self.list_convert.addItem("Wav to Txt")
-
+        
         self.audio_channel_field = QLineEdit()
         self.bit_rate_field = QLineEdit()
         self.sample_rate_field = QLineEdit()
@@ -82,8 +74,7 @@ class MainWidget(QWidget):
         text_area_message = QPlainTextEdit()
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
         menu = QVBoxLayout()
-        menu.addWidget(QLabel("Convert:"))
-        menu.addWidget(self.list_convert)
+        menu.addWidget(QLabel("Convert Audio"))
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
@@ -104,6 +95,9 @@ class MainWidget(QWidget):
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
+    
+    def get_layout(self):
+        return self.buttons
 
     def get_file_path(self):
         return str(self.file_path.text())
