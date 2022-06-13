@@ -22,6 +22,11 @@ class MainOCR(QWidget):
         super().__init__()
         self.layout = QVBoxLayout()
         self.buttons = ButtonsTop()
+        self.table = QTableWidget()
+        self.file_path = QLineEdit()
+        self.list_language = QComboBox()
+        self.list_format = QComboBox()
+        self.convert_button = QPushButton("Convert")
         self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
@@ -35,7 +40,7 @@ class MainOCR(QWidget):
         return body
 
     def right_layout(self):
-        self.table = QTableWidget()
+
         self.setting_table()
         show_button = QPushButton("Show Document")
         right = QVBoxLayout()
@@ -45,21 +50,17 @@ class MainOCR(QWidget):
 
     def left_layout(self):
 
-        list_language = QComboBox()
-        list_language.addItem("English")
-        list_language.addItem("Spanish")
-        list_language.addItem("Russian")
+        self.list_language.addItem("English")
+        self.list_language.addItem("Spanish")
+        self.list_language.addItem("Russian")
 
-        list_format = QComboBox()
-        list_format.addItem("txt")
+        self.list_format.addItem("txt")
 
-        self.file_path = QLineEdit()
         self.file_path.setReadOnly(True)
 
         browse_button = QPushButton("Browse")
         browse_button.clicked.connect(self.browse_file)
 
-        convert_button = QPushButton("Convert")
         text_area_message = QPlainTextEdit()
 
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
@@ -70,10 +71,10 @@ class MainOCR(QWidget):
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
         menu.addWidget(QLabel("Language:"))
-        menu.addWidget(list_language)
+        menu.addWidget(self.list_language)
         menu.addWidget(QLabel("Format:"))
-        menu.addWidget(list_format)
-        menu.addWidget(convert_button)
+        menu.addWidget(self.list_format)
+        menu.addWidget(self.convert_button)
         menu.addSpacerItem(vertical_spacer)
         menu.addWidget(QLabel("Message:"))
         menu.addWidget(text_area_message)
@@ -86,9 +87,27 @@ class MainOCR(QWidget):
     def get_layout(self):
         return self.buttons
 
+    def get_file_path(self):
+        return str(self.file_path.text())
+
+    def get_language(self):
+        match str(self.list_language.currentText()):
+            case 'English': return 'eng'
+            case 'Spanish': return 'esp'
+            case 'Russian': return 'rus'
+
+    def get_format(self):
+        return str(self.list_format.currentText())
+
+    def get_convert_button(self):
+        return self.convert_button
+
     def setting_table(self):
-        self.table.setColumnCount(3)
-        self.table.setHorizontalHeaderLabels(('Colum1', 'Colum2', 'Colum3'))
+        self.table.setColumnCount(6)
+        self.table.setHorizontalHeaderLabels(('Link', 'Language', 'To', 'Format', 'path_saved', 'path_download', 'path_translator'))
+        self.table.setColumnHidden(2, True)
+        self.table.setColumnHidden(4, True)
         self.table.setColumnHidden(5, True)
+        self.table.setColumnHidden(6, True)
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)

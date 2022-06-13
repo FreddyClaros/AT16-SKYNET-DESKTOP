@@ -10,18 +10,56 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+import os
+import random
+import shutil
 
+import requests
 
 from src.view.Convert_Service.convert_ocr_view import ConvertOCRView
+from decouple import config
 
+CONVERT_SERVICE_DIR = config('CONVERT_SERVICE_DIR')
 
 class ConvertControllerOCR:
     def __init__(self):
         self.view = ConvertOCRView()
         self.view.init_ui()
-        self.view.get_main_widget().get_layout().get_button_menu_ml().clicked.connect(self.popWindowML)
-        self.view.get_main_widget().get_layout().get_button_menu_convert().clicked.connect(self.popWindowConvert)
-    
+        self.view.get_main_widget().get_layout().\
+            get_button_menu_ml().clicked.connect(self.popWindowML)
+        self.view.get_main_widget().get_layout().\
+            get_button_menu_convert().clicked.connect(self.popWindowConvert)
+
+        self.view.get_main_widget().get_convert_button().clicked.connect(self.call_convert_service)
+
+    def call_convert_service(self):
+
+        # Defines variables
+        url = CONVERT_SERVICE_DIR
+        file_path = self.view.get_main_widget().get_file_path()
+        language = self.view.get_main_widget().get_language()
+        _format = self.view.get_main_widget().get_format()
+
+        file_name_loaded = file_path.split('/')
+        num_file = str(random.randint(1, 1000))
+        file_path_loaded = os.getcwd() + "/upload/" + num_file + file_name_loaded[-1]
+        shutil.copy2(file_path, file_path_loaded)
+
+        files = [
+            ('file',
+             (file_name_loaded[-1], open(file_path_loaded, 'rb'), 'application/octet-stream')
+             )
+        ]
+        payload = {
+            'language': language,
+            'format': _format,
+            'convert': 'OCR'
+        }
+
+        response = requests.post(url, files=files, data=payload, verify=False)
+        print(response.json)
+
+
     def popWindowML(self):
         self.view.pop_window_machine()
     
