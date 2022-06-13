@@ -106,10 +106,13 @@ class MainOCR(QWidget):
         return str(self.file_path.text())
 
     def get_language(self):
-        match str(self.list_language.currentText()):
-            case 'English': return 'eng'
-            case 'Spanish': return 'esp'
-            case 'Russian': return 'rus'
+        _option = str(self.list_language.currentText())
+        if _option == 'English':
+            return 'eng'
+        elif _option == 'Spanish':
+            return 'spa'
+        else:
+            return ''
 
     def get_format(self):
         return str(self.list_format.currentText())
