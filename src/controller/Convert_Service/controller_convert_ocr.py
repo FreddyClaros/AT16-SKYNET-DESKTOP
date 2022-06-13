@@ -10,12 +10,14 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 import os
 import random
 import shutil
 import requests
 from src.view.Convert_Service.convert_ocr_view import ConvertOCRView
 from decouple import config
+
 
 CONVERT_SERVICE_DIR = config('CONVERT_SERVICE_DIR')
 UPLOAD_FOLDER = '/upload/'

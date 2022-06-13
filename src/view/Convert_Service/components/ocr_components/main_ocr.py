@@ -10,16 +10,16 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-import os
 
+import os
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
     QHeaderView, \
     QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView, \
     QTableWidgetItem
-
 from src.view.Convert_Service.components.ocr_components.image_loaded import ImageLoaded
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
+
 
 BACK_IMAGE = "/Download/back_img.jpg"
 
