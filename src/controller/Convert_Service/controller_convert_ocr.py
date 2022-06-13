@@ -57,7 +57,22 @@ class ConvertControllerOCR:
         }
 
         response = requests.post(url, files=files, data=payload, verify=False)
-        print(response.json)
+        message = (response.json())['message']
+        _message = str(message).replace('\\', '/')
+        file_name_result = (_message.split('/'))[-1]
+
+        response_file = requests.request('GET', _message, headers={}, data={})
+        file_path_download = os.getcwd()+'/Download/' + file_name_result
+
+        if _format == "txt":
+            with open(file_path_download, 'w') as new_file:
+                new_file.write(response_file.text)
+
+        self.view.get_main_widget().add_values_table(message, language, '', _format,
+                                                     file_path_loaded, file_path_download)
+        print(_message)
+        print(file_name_result)
+
 
 
     def popWindowML(self):

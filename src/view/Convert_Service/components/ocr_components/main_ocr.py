@@ -11,8 +11,10 @@
 # with Jalasoft.
 #
 
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QHeaderView, \
-                    QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
+    QHeaderView, \
+    QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView, \
+    QTableWidgetItem
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
@@ -104,10 +106,20 @@ class MainOCR(QWidget):
 
     def setting_table(self):
         self.table.setColumnCount(6)
-        self.table.setHorizontalHeaderLabels(('Link', 'Language', 'To', 'Format', 'path_saved', 'path_download', 'path_translator'))
+        self.table.setHorizontalHeaderLabels(('Link', 'Language', 'To', 'Format', 'path_saved',
+                                              'path_download', 'path_translator'))
         self.table.setColumnHidden(2, True)
         self.table.setColumnHidden(4, True)
         self.table.setColumnHidden(5, True)
         self.table.setColumnHidden(6, True)
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+
+    def add_values_table(self, link, language, _to, _format, path_saved, path_download):
+        self.table.insertRow(self.table.rowCount())
+        self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(link))
+        self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(language))
+        self.table.setItem(self.table.rowCount()-1, 2, QTableWidgetItem(_to))
+        self.table.setItem(self.table.rowCount()-1, 3, QTableWidgetItem(_format))
+        self.table.setItem(self.table.rowCount() - 1, 4, QTableWidgetItem(path_saved))
+        self.table.setItem(self.table.rowCount() - 1, 5, QTableWidgetItem(path_download))
