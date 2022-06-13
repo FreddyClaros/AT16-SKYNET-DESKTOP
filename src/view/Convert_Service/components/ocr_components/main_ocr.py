@@ -10,11 +10,14 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+import os
 
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
     QHeaderView, \
     QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView, \
     QTableWidgetItem
+
+from src.view.Convert_Service.components.ocr_components.image_loaded import ImageLoaded
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
@@ -28,9 +31,12 @@ class MainOCR(QWidget):
         self.file_path = QLineEdit()
         self.list_language = QComboBox()
         self.list_format = QComboBox()
+        self.image_loaded = ImageLoaded()
+        self.result = QPlainTextEdit()
         self.convert_button = QPushButton("Convert")
         self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
+
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
 
@@ -43,12 +49,18 @@ class MainOCR(QWidget):
 
     def right_layout(self):
 
+        layout_results = QHBoxLayout()
         self.setting_table()
-        show_button = QPushButton("Show Document")
-        right = QVBoxLayout()
-        right.addWidget(self.table)
-        right.addWidget(show_button)
-        return right
+        layout_results.addWidget(self.table, 50)
+
+        layout_images = QVBoxLayout()
+        self.image_loaded.show_image(os.getcwd() + "/Download/back_img.jpg")
+        layout_images.addWidget(self.image_loaded, 50)
+        layout_images.addWidget(self.result, 50)
+
+        layout_results.addLayout(layout_images, 50)
+
+        return layout_results
 
     def left_layout(self):
 
@@ -103,6 +115,15 @@ class MainOCR(QWidget):
 
     def get_convert_button(self):
         return self.convert_button
+
+    def get_table(self):
+        return self.table
+
+    def clear_result(self):
+        self.result.clear()
+
+    def set_result(self, message):
+        self.result.appendPlainText(message)
 
     def setting_table(self):
         self.table.setColumnCount(6)

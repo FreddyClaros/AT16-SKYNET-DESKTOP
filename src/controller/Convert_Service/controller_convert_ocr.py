@@ -31,6 +31,8 @@ class ConvertControllerOCR:
             get_button_menu_convert().clicked.connect(self.popWindowConvert)
 
         self.view.get_main_widget().get_convert_button().clicked.connect(self.call_convert_service)
+        self.table_result = self.view.get_main_widget().get_table()
+        self.table_result.cellClicked.connect(self.update_image_loaded)
 
     def call_convert_service(self):
 
@@ -73,7 +75,19 @@ class ConvertControllerOCR:
         print(_message)
         print(file_name_result)
 
+    def update_image_loaded(self):
+        row = self.table_result.currentRow()
+        new_dir = self.table_result.item(row, 4).text()
+        self.view.get_main_widget().image_loaded.show_image(new_dir)
 
+        _format = self.table_result.item(row, 3).text()
+        path_downloaded = self.table_result.item(row, 5).text()
+
+        self.view.get_main_widget().clear_result()
+
+        if _format == 'txt':
+            with open(path_downloaded, 'r') as f:
+                self.view.get_main_widget().set_result(f.read())
 
     def popWindowML(self):
         self.view.pop_window_machine()
