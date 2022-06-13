@@ -13,7 +13,7 @@
 
 import os
 from PyQt5.QtWidgets import QMainWindow
-from src.view.Convert_Service.components.main_ocr import MainOCR
+from src.view.Convert_Service.components.ocr_components.main_ocr import MainOCR
 
 
 class ConvertOCRView(QMainWindow):
