@@ -21,6 +21,7 @@ from src.view.Convert_Service.components.ocr_components.image_loaded import Imag
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
+BACK_IMAGE = "/Download/back_img.jpg"
 
 class MainOCR(QWidget):
     def __init__(self):
@@ -54,7 +55,7 @@ class MainOCR(QWidget):
         layout_results.addWidget(self.table, 50)
 
         layout_images = QVBoxLayout()
-        self.image_loaded.show_image(os.getcwd() + "/Download/back_img.jpg")
+        self.image_loaded.show_image(os.getcwd() + BACK_IMAGE)
         layout_images.addWidget(self.image_loaded, 50)
         layout_images.addWidget(self.result, 50)
 
@@ -138,9 +139,9 @@ class MainOCR(QWidget):
 
     def add_values_table(self, link, language, _to, _format, path_saved, path_download):
         self.table.insertRow(self.table.rowCount())
-        self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(link))
-        self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(language))
-        self.table.setItem(self.table.rowCount()-1, 2, QTableWidgetItem(_to))
-        self.table.setItem(self.table.rowCount()-1, 3, QTableWidgetItem(_format))
+        self.table.setItem(self.table.rowCount() - 1, 0, QTableWidgetItem(link))
+        self.table.setItem(self.table.rowCount() - 1, 1, QTableWidgetItem(language))
+        self.table.setItem(self.table.rowCount() - 1, 2, QTableWidgetItem(_to))
+        self.table.setItem(self.table.rowCount() - 1, 3, QTableWidgetItem(_format))
         self.table.setItem(self.table.rowCount() - 1, 4, QTableWidgetItem(path_saved))
         self.table.setItem(self.table.rowCount() - 1, 5, QTableWidgetItem(path_download))

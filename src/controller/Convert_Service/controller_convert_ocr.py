@@ -13,13 +13,14 @@
 import os
 import random
 import shutil
-
 import requests
-
 from src.view.Convert_Service.convert_ocr_view import ConvertOCRView
 from decouple import config
 
 CONVERT_SERVICE_DIR = config('CONVERT_SERVICE_DIR')
+UPLOAD_FOLDER = '/upload/'
+DOWNLOAD_FOLDER = '/Download/'
+
 
 class ConvertControllerOCR:
     def __init__(self):
@@ -44,7 +45,7 @@ class ConvertControllerOCR:
 
         file_name_loaded = file_path.split('/')
         num_file = str(random.randint(1, 1000))
-        file_path_loaded = os.getcwd() + "/upload/" + num_file + file_name_loaded[-1]
+        file_path_loaded = os.getcwd() + UPLOAD_FOLDER + num_file + file_name_loaded[-1]
         shutil.copy2(file_path, file_path_loaded)
 
         files = [
@@ -64,7 +65,7 @@ class ConvertControllerOCR:
         file_name_result = (_message.split('/'))[-1]
 
         response_file = requests.request('GET', _message, headers={}, data={})
-        file_path_download = os.getcwd()+'/Download/' + file_name_result
+        file_path_download = os.getcwd() + DOWNLOAD_FOLDER + file_name_result
 
         if _format == "txt":
             with open(file_path_download, 'w') as new_file:
@@ -72,8 +73,6 @@ class ConvertControllerOCR:
 
         self.view.get_main_widget().add_values_table(message, language, '', _format,
                                                      file_path_loaded, file_path_download)
-        print(_message)
-        print(file_name_result)
 
     def update_image_loaded(self):
         row = self.table_result.currentRow()
