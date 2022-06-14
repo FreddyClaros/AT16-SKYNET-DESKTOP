@@ -34,7 +34,7 @@ class MainWidget(QWidget):
         self.table = QTableWidget()
         self.layout.addLayout(self.buttons)
         self.image_loaded = ImageLoaded()
-        
+
         self.result = ImageLoaded()
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
