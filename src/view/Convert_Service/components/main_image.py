@@ -13,17 +13,29 @@
 
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
     QComboBox, QSpacerItem, QSizePolicy, QFileDialog
+import os
 from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
+    QHeaderView, \
+    QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView, \
+    QTableWidgetItem
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
+from src.view.Convert_Service.components.ocr_components.image_loaded import ImageLoaded
 
+
+BACK_IMAGE = "/Download/back_img.jpg"
 
 class MainWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QVBoxLayout()
         self.buttons = ButtonsTop()
+        self.table = QTableWidget()
         self.layout.addLayout(self.buttons)
+        self.image_loaded = ImageLoaded()
+
+        self.result = ImageLoaded()
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
@@ -36,17 +48,19 @@ class MainWidget(QWidget):
         return body
 
     def right_layout(self):
-        self.text_result2 = QPlainTextEdit()
-        self.label_right = QLabel(self)
-        self.pixmap = QPixmap()
-        self.label_right.setPixmap(self.pixmap)
+        layout_results = QHBoxLayout()
+        self.setting_table()
+        layout_results.addWidget(self.table, 50)
 
-        show_button = QPushButton("Show Image")
-        right = QVBoxLayout()
-        right.addWidget(self.label_right, 75)
-        right.addWidget(show_button)
-        return right
+        layout_images = QVBoxLayout()
+        self.image_loaded.show_image(os.getcwd() + BACK_IMAGE)
+        self.result.show_image(os.getcwd() + BACK_IMAGE)
+        layout_images.addWidget(self.image_loaded, 50)
+        layout_images.addWidget(self.result, 50)
 
+        layout_results.addLayout(layout_images, 50)
+
+        return layout_results
 
     def left_layout(self):
 
@@ -55,6 +69,7 @@ class MainWidget(QWidget):
         self.list_color.addItem("sRGB")
 
         self.list_degrees = QComboBox()
+        self.list_degrees.addItem("0")
         self.list_degrees.addItem("90")
         self.list_degrees.addItem("180")
         self.list_degrees.addItem("270")
@@ -137,14 +152,14 @@ class MainWidget(QWidget):
         result = ''
         rsp = str(self.list_horizontal_flip.currentText())
         if rsp == 'True':
-            result = '-flop'
+            result = 'True'
         return result
 
     def get_vertical_flip(self):
         result = ''
         rsp = str(self.list_vertical_flip.currentText())
         if rsp == 'True':
-            result = '-flip'
+            result = 'True'
         return result
 
     def get_height(self):
@@ -161,3 +176,32 @@ class MainWidget(QWidget):
     
     def get_layout(self):
         return self.buttons
+
+    def get_table(self):
+        return self.table
+
+    def clear_result(self):
+        self.result.clear()
+
+    def set_result(self, message):
+        self.result.appendPlainText(message)
+
+    def setting_table(self):
+        self.table.setColumnCount(6)
+        self.table.setHorizontalHeaderLabels(('Link', 'File', 'To', 'Format', 'path_saved',
+                                              'path_download', 'path_translator'))
+        self.table.setColumnHidden(2, True)
+        self.table.setColumnHidden(4, True)
+        self.table.setColumnHidden(5, True)
+        self.table.setColumnHidden(6, True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+
+    def add_values_table(self, link, language, _to, _format, path_saved, path_download):
+        self.table.insertRow(self.table.rowCount())
+        self.table.setItem(self.table.rowCount() - 1, 0, QTableWidgetItem(link))
+        self.table.setItem(self.table.rowCount() - 1, 1, QTableWidgetItem(language))
+        self.table.setItem(self.table.rowCount() - 1, 2, QTableWidgetItem(_to))
+        self.table.setItem(self.table.rowCount() - 1, 3, QTableWidgetItem(_format))
+        self.table.setItem(self.table.rowCount() - 1, 4, QTableWidgetItem(path_saved))
+        self.table.setItem(self.table.rowCount() - 1, 5, QTableWidgetItem(path_download))
