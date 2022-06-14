@@ -48,17 +48,14 @@ class MainWidget(QWidget):
         index = self.table.selectionModel().currentIndex()
         if index.row() == -1:
             return
-        audio_path = self.table.item(index.row(), 3).text()
+        audio_path = self.table.item(index.row(), 2).text()
         self.player = PlayerView()
         self.player.init_ui(audio_path)
-        #self.player.play_btn
         self.player.play_btn.clicked.connect(self.player.play_it)
         self.player.pause_btn.clicked.connect(self.player.pause_it)
         self.player.stop_btn.clicked.connect(self.player.stop_it)
 
-
     def left_layout(self):
-        
         self.audio_channel_field = QLineEdit()
         self.bit_rate_field = QLineEdit()
         self.sample_rate_field = QLineEdit()
@@ -124,8 +121,7 @@ class MainWidget(QWidget):
         self.text_result.appendPlainText(message)
 
     def setting_table(self):
-        self.table.setColumnCount(4)
-        self.table.setHorizontalHeaderLabels(('Status', 'Input format', 'Output format', 'Output path'))
-        self.table.setColumnHidden(2, False)
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(('Input format', 'Output format', 'Output path'))
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
