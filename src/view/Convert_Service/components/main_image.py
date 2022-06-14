@@ -22,7 +22,8 @@ class MainWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QVBoxLayout()
-        self.layout.addLayout(ButtonsTop())
+        self.buttons = ButtonsTop()
+        self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
@@ -48,14 +49,6 @@ class MainWidget(QWidget):
 
 
     def left_layout(self):
-        self.list_convert = QComboBox()
-        self.list_convert.addItem("Image")
-        self.list_convert.addItem("OCR")
-        self.list_convert.addItem("Video")
-        self.list_convert.addItem("Metadata")
-        self.list_convert.addItem("Audio")
-        self.list_convert.addItem("Translator")
-        self.list_convert.addItem("Wav to Txt")
 
         self.list_color = QComboBox()
         self.list_color.addItem("gray")
@@ -96,8 +89,7 @@ class MainWidget(QWidget):
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
 
         menu = QVBoxLayout()
-        menu.addWidget(QLabel("Convert:"))
-        menu.addWidget(self.list_convert)
+        menu.addWidget(QLabel("Convert Image"))
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(self.browse_button)
@@ -166,4 +158,6 @@ class MainWidget(QWidget):
 
     def get_convert_button(self):
         return self.convert
-
+    
+    def get_layout(self):
+        return self.buttons

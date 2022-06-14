@@ -1,6 +1,19 @@
+#
+# main_object.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
+
 import os
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, \
-                            QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QHeaderView, \
+                     QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView
 from src.view.machine_learning.components.title import Title
 from src.view.machine_learning.components.buttons_top import ButtonsTop
 
@@ -11,7 +24,8 @@ class MainObjectWidget(QWidget):
         self.style = os.getcwd() + "/resources/compiler.css"
         self.setStyleSheet(open(self.style).read())
         self.layout = QVBoxLayout()
-        self.layout.addLayout(ButtonsTop())
+        self.buttons = ButtonsTop()
+        self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
@@ -25,21 +39,16 @@ class MainObjectWidget(QWidget):
 
     @staticmethod
     def right_layout(self):
-
+        self.table = QTableWidget()
+        self.setting_table()
         show_button = QPushButton("Show Image")
         right = QVBoxLayout()
-        right.addWidget(QPlainTextEdit(), 75)
+        right.addWidget(self.table)
         right.addWidget(show_button)
         return right
 
     @staticmethod
     def left_layout(self):
-        list_machine_learning = QComboBox()
-        list_machine_learning.addItem("Object Recognizer")
-        list_machine_learning.addItem("Face Recognizer")
-        list_machine_learning.addItem("Iris Recognizer search")
-        list_machine_learning.addItem("Iris Recognizer train")
-        list_machine_learning.addItem("Emotion Recognizer")
 
         self.file_path = QLineEdit()
         self.file_path.setReadOnly(True)
@@ -68,8 +77,7 @@ class MainObjectWidget(QWidget):
         vertical_spacer = QSpacerItem(10, 700, QSizePolicy.Expanding)
 
         menu = QVBoxLayout()
-        menu.addWidget(QLabel("Search by:"))
-        menu.addWidget(list_machine_learning)
+        menu.addWidget(QLabel("Object Recognizer"))
         menu.addWidget(QLabel("Video Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
@@ -88,3 +96,13 @@ class MainObjectWidget(QWidget):
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
+    
+    def get_layout(self):
+        return self.buttons
+
+    def setting_table(self):
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(('Colum1', 'Colum2', 'Colum3'))
+        self.table.setColumnHidden(5, True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)

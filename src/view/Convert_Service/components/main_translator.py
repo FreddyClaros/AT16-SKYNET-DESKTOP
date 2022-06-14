@@ -11,9 +11,9 @@
 # with Jalasoft.
 #
 
-import os
+
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
-    QComboBox, QSpacerItem, QSizePolicy, QFileDialog
+                     QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QHeaderView, QAbstractItemView
 from src.view.Convert_Service.components.title import Title
 from src.view.Convert_Service.components.buttons_top import ButtonsTop
 
@@ -22,7 +22,8 @@ class MainTranslator(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QVBoxLayout()
-        self.layout.addLayout(ButtonsTop())
+        self.buttons = ButtonsTop()
+        self.layout.addLayout(self.buttons)
         self.layout.addWidget(Title())
         self.layout.addLayout(self.get_layout_body(), 10)
         self.setLayout(self.layout)
@@ -36,20 +37,14 @@ class MainTranslator(QWidget):
 
     def right_layout(self):
         show_button = QPushButton("Show Document")
+        self.table = QTableWidget()
+        self.setting_table()
         right = QVBoxLayout()
-        right.addWidget(QPlainTextEdit(), 75)
+        right.addWidget(self.table) 
         right.addWidget(show_button)
         return right
 
     def left_layout(self):
-        list_convert = QComboBox()
-        list_convert.addItem("Translator")
-        list_convert.addItem("OCR")
-        list_convert.addItem("Image")
-        list_convert.addItem("Video")
-        list_convert.addItem("Metadata")
-        list_convert.addItem("Audio")
-        list_convert.addItem("Wav to Txt")
 
         list_language_input = QComboBox()
         list_language_input.addItem("en-EN")
@@ -77,8 +72,7 @@ class MainTranslator(QWidget):
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
 
         menu = QVBoxLayout()
-        menu.addWidget(QLabel("Convert:"))
-        menu.addWidget(list_convert)
+        menu.addWidget(QLabel("Convert Translator"))
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
@@ -97,3 +91,13 @@ class MainTranslator(QWidget):
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
+    
+    def get_layout(self):
+        return self.buttons
+    
+    def setting_table(self):
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(('Colum1', 'Colum2', 'Colum3'))
+        self.table.setColumnHidden(5, True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)

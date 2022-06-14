@@ -52,3 +52,11 @@ class ConvertControllerMetadata:
         with open(new_dir, "r") as f:
             text = f.read()
         self.view.main_widget.get_editor_text().setPlainText(text)
+        self.view.get_main_widget().get_layout().get_button_menu_ml().clicked.connect(self.popWindowML)
+        self.view.get_main_widget().get_layout().get_button_menu_convert().clicked.connect(self.popWindowConvert)
+    
+    def popWindowML(self):
+        self.view.pop_window_machine()
+    
+    def popWindowConvert(self):
+        self.view.pop_window_convert()

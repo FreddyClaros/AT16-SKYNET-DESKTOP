@@ -19,3 +19,11 @@ class ConvertControllerWavToTxt:
     def __init__(self):
         self.view = ConvertWavToTxtView()
         self.view.init_ui()
+        self.view.get_main_widget().get_layout().get_button_menu_ml().clicked.connect(self.popWindowML)
+        self.view.get_main_widget().get_layout().get_button_menu_convert().clicked.connect(self.popWindowConvert)
+    
+    def popWindowML(self):
+        self.view.pop_window_machine()
+    
+    def popWindowConvert(self):
+        self.view.pop_window_convert()
