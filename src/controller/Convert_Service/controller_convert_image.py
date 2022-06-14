@@ -34,6 +34,7 @@ class ConvertControllerImage:
 
     def show_result(self):
         url = "http://127.0.0.1:6008/convert"
+
         file_path = self.view.main_widget.get_file_path()
         file = {'file': open(file_path, 'rb')}
         convert = 'Image'
