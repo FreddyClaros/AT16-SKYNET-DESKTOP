@@ -11,6 +11,9 @@
 # with Jalasoft.
 #
 
+
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
+    QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QToolBar, QAction
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QHeaderView, \
                     QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView
 from src.view.Convert_Service.components.title import Title
@@ -28,7 +31,6 @@ class MainMetadata(QWidget):
         self.setLayout(self.layout)
 
     def get_layout_body(self):
-
         body = QHBoxLayout()
         body.addLayout(self.left_layout(), 10)
         body.addLayout(self.right_layout(), 75)
@@ -37,6 +39,17 @@ class MainMetadata(QWidget):
     def right_layout(self):
         self.table = QTableWidget()
         self.setting_table()
+        self.editor = QPlainTextEdit()
+        right = QVBoxLayout()
+        right.addWidget(self.table, 50)
+        right.addWidget(self.editor, 25)
+        return right
+
+    def left_layout(self):
+        self.list_convert = QComboBox()
+        self.list_convert.addItem("Metadata")
+        self.list_format = QComboBox()
+        self.list_format.addItem("txt")
         show_button = QPushButton("Show Document")
         right = QVBoxLayout()
         right.addWidget(self.table)
@@ -47,27 +60,23 @@ class MainMetadata(QWidget):
 
         list_format = QComboBox()
         list_format.addItem("txt")
-
         self.file_path = QLineEdit()
         self.file_path.setReadOnly(True)
-
         browse_button = QPushButton("Browse")
         browse_button.clicked.connect(self.browse_file)
-
-        convert_button = QPushButton("Convert")
-
+        self.convert_button = QPushButton("Convert")
         text_area_message = QPlainTextEdit()
-
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
-
         menu = QVBoxLayout()
+        menu.addWidget(QLabel("Convert:"))
+        menu.addWidget(self.list_convert)
         menu.addWidget(QLabel("Convert Metadata"))
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
         menu.addWidget(browse_button)
         menu.addWidget(QLabel("Output Format:"))
-        menu.addWidget(list_format)
-        menu.addWidget(convert_button)
+        menu.addWidget(self.list_format)
+        menu.addWidget(self.convert_button)
         menu.addSpacerItem(vertical_spacer)
         menu.addWidget(QLabel("Message:"))
         menu.addWidget(text_area_message)
@@ -76,6 +85,46 @@ class MainMetadata(QWidget):
     def browse_file(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
+
+    def get_file_path(self):
+        return str(self.file_path.text())
+
+    def get_list_convert(self):
+        return str(self.list_convert.currentText())
+
+    def get_convert_button(self):
+        return self.convert_button
+
+    def get_output_format(self):
+        return str(self.list_format.currentText())
+
+    def get_editor_text(self):
+        return self.editor
+
+    def get_table(self):
+        return self.table
+
+    def file_open3(self, path):
+        print(path)
+        with open(path, "r") as f:
+            text = f.read()
+        self.editor.setPlainText(text)
+
+    def setting_table(self):
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(('Link', 'Output Format', 'Status', 'Path Saved', 'Path Download'))
+        self.table.setColumnHidden(3, True)
+        self.table.setColumnHidden(4, True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+
+    def add_values_table(self, link, output_format, status, path_saved, path_download):
+        self.table.insertRow(self.table.rowCount())
+        self.table.setItem(self.table.rowCount() - 1, 0, QTableWidgetItem(link))
+        self.table.setItem(self.table.rowCount() - 1, 1, QTableWidgetItem(output_format))
+        self.table.setItem(self.table.rowCount() - 1, 2, QTableWidgetItem(status))
+        self.table.setItem(self.table.rowCount() - 1, 3, QTableWidgetItem(path_saved))
+        self.table.setItem(self.table.rowCount() - 1, 4, QTableWidgetItem(path_download))
     
     def get_layout(self):
         return self.buttons
