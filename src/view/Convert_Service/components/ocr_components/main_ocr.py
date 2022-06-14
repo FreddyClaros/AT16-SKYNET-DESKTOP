@@ -57,6 +57,14 @@ class MainOCR(QWidget):
         layout_images = QVBoxLayout()
         self.image_loaded.show_image(os.getcwd() + BACK_IMAGE)
         layout_images.addWidget(self.image_loaded, 50)
+        self.result.setStyleSheet('''QPlainTextEdit
+        {
+            color: black;
+            background-color: rgb(223, 227, 231); 
+            font-size: 20px;
+            font-family: Calibri;
+        }
+        ''')
         layout_images.addWidget(self.result, 50)
 
         layout_results.addLayout(layout_images, 50)
