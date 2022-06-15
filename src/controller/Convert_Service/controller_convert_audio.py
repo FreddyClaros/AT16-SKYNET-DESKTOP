@@ -19,6 +19,8 @@ from decouple import config
 
 
 CONVERT_SERVICE_DIR = config('CONVERT_SERVICE_DIR')
+UPLOAD_FOLDER = '/upload/'
+DOWNLOAD_FOLDER = 'Download/'
 
 
 class ConvertControllerAudio:
@@ -55,7 +57,7 @@ class ConvertControllerAudio:
         url_return = message
         name_file = url_return.split("/")
         my_file = requests.get(url_return)
-        folder = 'Download/' + name_file[-1]
+        folder = DOWNLOAD_FOLDER + name_file[-1]
         input_format_type = file_path.split(".")
         open(folder, 'wb').write(my_file.content)
 
