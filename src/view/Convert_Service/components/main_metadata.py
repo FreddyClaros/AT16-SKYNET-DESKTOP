@@ -12,8 +12,6 @@
 #
 
 
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
-    QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QToolBar, QAction
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QHeaderView, \
                     QPushButton, QComboBox, QSpacerItem, QSizePolicy, QFileDialog, QTableWidget, QAbstractItemView, QTableWidgetItem
 from src.view.Convert_Service.components.title import Title
@@ -60,7 +58,6 @@ class MainMetadata(QWidget):
         vertical_spacer = QSpacerItem(10, 600, QSizePolicy.Expanding)
         menu = QVBoxLayout()
         menu.addWidget(QLabel("Convert:"))
-        menu.addWidget(self.list_convert)
         menu.addWidget(QLabel("Convert Metadata"))
         menu.addWidget(QLabel("File Path:"))
         menu.addWidget(self.file_path)
@@ -77,46 +74,6 @@ class MainMetadata(QWidget):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', 'D:\\', '')
         self.file_path.setText(file_name[0])
 
-    def get_file_path(self):
-        return str(self.file_path.text())
-
-    def get_list_convert(self):
-        return str(self.list_convert.currentText())
-
-    def get_convert_button(self):
-        return self.convert_button
-
-    def get_output_format(self):
-        return str(self.list_format.currentText())
-
-    def get_editor_text(self):
-        return self.editor
-
-    def get_table(self):
-        return self.table
-
-    def file_open3(self, path):
-        print(path)
-        with open(path, "r") as f:
-            text = f.read()
-        self.editor.setPlainText(text)
-
-    def setting_table(self):
-        self.table.setColumnCount(5)
-        self.table.setHorizontalHeaderLabels(('Link', 'Output Format', 'Status', 'Path Saved', 'Path Download'))
-        self.table.setColumnHidden(3, True)
-        self.table.setColumnHidden(4, True)
-        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
-
-    def add_values_table(self, link, output_format, status, path_saved, path_download):
-        self.table.insertRow(self.table.rowCount())
-        self.table.setItem(self.table.rowCount() - 1, 0, QTableWidgetItem(link))
-        self.table.setItem(self.table.rowCount() - 1, 1, QTableWidgetItem(output_format))
-        self.table.setItem(self.table.rowCount() - 1, 2, QTableWidgetItem(status))
-        self.table.setItem(self.table.rowCount() - 1, 3, QTableWidgetItem(path_saved))
-        self.table.setItem(self.table.rowCount() - 1, 4, QTableWidgetItem(path_download))
-    
     def get_file_path(self):
         return str(self.file_path.text())
 

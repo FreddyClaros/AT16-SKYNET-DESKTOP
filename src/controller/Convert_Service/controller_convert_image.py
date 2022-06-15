@@ -16,9 +16,11 @@ import os
 import random
 import shutil
 import requests
+from decouple import config
 
+CONVERT_SERVICE_DIR = config('CONVERT_SERVICE_DIR')
 UPLOAD_FOLDER = '/upload/'
-DOWNLOAD_FOLDER = '/Download/'
+DOWNLOAD_FOLDER = 'Download/'
 
 
 class ConvertControllerImage:
@@ -33,7 +35,7 @@ class ConvertControllerImage:
         self.table_result.cellClicked.connect(self.update_image_loaded)
 
     def show_result(self):
-        url = "http://127.0.0.1:6008/convert"
+        url = CONVERT_SERVICE_DIR
 
         file_path = self.view.main_widget.get_file_path()
         file = {'file': open(file_path, 'rb')}
@@ -61,9 +63,9 @@ class ConvertControllerImage:
         url = message
         name_fyle = url.split('/')
         myfile = requests.get(url)
-        folder = 'Download/'+name_fyle[-1]
+        folder = DOWNLOAD_FOLDER + name_fyle[-1]
         open(folder, 'wb').write(myfile.content)
-        file_path_download = os.getcwd() + DOWNLOAD_FOLDER + file_name_result
+        file_path_download = os.getcwd() + '/' + DOWNLOAD_FOLDER + file_name_result
         self.view.get_main_widget().add_values_table(message, file_path_loaded, '', formato,
                                                      file_path_loaded, file_path_download)
 
